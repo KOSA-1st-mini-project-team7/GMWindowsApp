@@ -36,12 +36,19 @@ javafx {
 
 dependencies {
   // javaFX
+  implementation 'org.openjfx:javafx:21'
   implementation 'com.jfoenix:jfoenix:9.0.10'
   implementation 'org.controlsfx:controlsfx:11.2.1'
 
   // DB
   implementation 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
 
+  // Lombok
+  compileOnly 'org.projectlombok:lombok:1.18.32'
+  annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+  testCompileOnly 'org.projectlombok:lombok:1.18.32'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
