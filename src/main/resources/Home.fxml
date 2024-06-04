@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0"
+            prefWidth="961.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.gymmanagementapp.Main">
+    <Pane style="-fx-background-color: #FFF; -fx-background-radius: 10;">
+        <VBox prefHeight="530.0" prefWidth="207.0" style="-fx-background-color: #E5E5E5;">
+            <HBox alignment="CENTER">
+                <ImageView fitHeight="60.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@images/logo.png"/>
+                </ImageView>
+            </HBox>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="37.0"
+                    prefWidth="210.0" stylesheets="@css/fullpackstyling.css" text="회원 관리">
+                <padding>
+                    <Insets left="40.0"/>
+                </padding>
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/user.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0"
+                    mnemonicParsing="false" prefHeight="37.0" prefWidth="210.0" stylesheets="@css/fullpackstyling.css"
+                    text="출석 관리">
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <padding>
+                    <Insets left="40.0"/>
+                </padding>
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/attendance.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="84.0"
+                    mnemonicParsing="false" prefHeight="37.0" prefWidth="210.0" stylesheets="@css/fullpackstyling.css"
+                    text="Setttings">
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <padding>
+                    <Insets left="40.0"/>
+                </padding>
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@images/settings.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Pane prefHeight="254.0" prefWidth="207.0">
+                <Circle fx:id="shpActive" fill="WHITE" layoutX="53.0" layoutY="72.0" radius="7.0" stroke="#1cd95c"
+                        strokeType="INSIDE"/>
+                <Circle fill="WHITE" layoutX="53.0" layoutY="104.0" radius="7.0" stroke="#d9c81c" strokeType="INSIDE"/>
+                <Line endX="-4.0" endY="-8.0" layoutX="34.0" layoutY="43.0" startX="148.0" startY="-8.0"
+                      stroke="#ddd1d1"/>
+                <Label fx:id="lblActive" layoutX="77.0" layoutY="65.0" text="회원수" textFill="#4a4747">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="lblOffline" layoutX="77.0" layoutY="96.0" text="방문자수" textFill="#4a4747">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                </Label>
+            </Pane>
+        </VBox>
+        <Pane layoutX="207.0" prefHeight="514.0" prefWidth="764.0" style="-fx-background-color: #fff;">
+            <HBox alignment="CENTER" layoutX="440.0" layoutY="14.0" spacing="5.0">
+                <TextField/>
+                <Button mnemonicParsing="false" text="조회"/>
+                <Line endX="-99.99996948242188" endY="14.666656494140625" startX="-100.0"/>
+                <Button mnemonicParsing="false" text="등록"/>
+                <Button mnemonicParsing="false" text="수정"/>
+            </HBox>
+            <AnchorPane layoutX="36.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0"
+                        style="-fx-background-color: #E5E5E5;">
+                <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+            </AnchorPane>
+            <VBox layoutX="271.0" layoutY="51.0" prefHeight="200.0" prefWidth="457.0" spacing="10.0">
+                <HBox spacing="44.0">
+                    <Label text="이름"/>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+                </HBox>
+                <HBox spacing="44.0">
+                    <Label text="성별"/>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+                </HBox>
+                <HBox spacing="20.0">
+                    <Label text="생년월일"/>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+                </HBox>
+                <HBox spacing="32.0">
+                    <Label text="주소지"/>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+                </HBox>
+                <HBox prefHeight="139.0" prefWidth="444.0" spacing="44.0">
+                    <Label text="메모"/>
+                    <TextField prefHeight="104.0" prefWidth="380.0"/>
+                </HBox>
+            </VBox>
+            <Label layoutX="36.0" layoutY="18.0" text="회원 관리"/>
+            <VBox layoutX="36.0" layoutY="267.0" prefHeight="215.0" prefWidth="685.0" spacing="5.0">
+                <Label text="등록 정보"/>
+                <TableView prefHeight="191.0" prefWidth="685.0">
+                    <columns>
+                        <TableColumn prefWidth="98.00001525878906" text="등록 일자"/>
+                        <TableColumn prefWidth="156.0" text="멤버십"/>
+                        <TableColumn minWidth="100.0" prefWidth="-1.0" text="시작 일자"/>
+                        <TableColumn minWidth="100.0" prefWidth="-1.0" text="종료 일자"/>
+                        <TableColumn prefWidth="193.9998779296875" text="비고"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+        </Pane>
+    </Pane>
+</AnchorPane>
