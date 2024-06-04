@@ -5,29 +5,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class DbConfigLoader {
-    private final String username;
-    private final String password;
+public class DBConfigLoader {
+    private static final String CONFIG_FILE = "application-secret.properties";
+    private static final Properties PROPERTIES;
 
-    public DbConfigLoader() {
+    static {
         String projectRoot = System.getProperty("user.dir");
-
-        String fileName = "application-secret.properties";
-        Properties properties = new Properties();
-        try (InputStream inputStream = new FileInputStream(projectRoot + "/src/main/resources/" + fileName)) {
-            properties.load(inputStream);
+        PROPERTIES = new Properties();
+        try (InputStream inputStream = new FileInputStream(projectRoot + "/src/main/resources/" + CONFIG_FILE)){
+            PROPERTIES.load(inputStream);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //TODO: 예외 처리
+            e.printStackTrace();
         }
-        username = properties.getProperty("custom.datasource.username");
-        password = properties.getProperty("custom.datasource.password");
     }
 
-    public String getUsername() {
-        return username;
+    public static String getUsername() {
+        return PROPERTIES.getProperty("custom.datasource.username");
     }
 
-    public String getPassword() {
-        return password;
+    public static String getPassword() {
+        return PROPERTIES.getProperty("custom.datasource.password");
     }
 }
