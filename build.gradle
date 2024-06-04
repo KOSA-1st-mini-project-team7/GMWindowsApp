@@ -20,13 +20,13 @@ ext {
 sourceCompatibility = '21'
 targetCompatibility = '21'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
 }
 
 application {
   mainModule = 'org.example.gymmanagementapp'
-  mainClass = 'org.example.gymmanagementapp.HelloApplication'
+  mainClass = 'org.example.gymmanagementapp.Main'
 }
 
 javafx {
@@ -35,9 +35,12 @@ javafx {
 }
 
 dependencies {
-  implementation('org.controlsfx:controlsfx:11.2.1')
-  implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-  implementation group: 'com.oracle.database.jdbc', name: 'ojdbc6', version: '11.2.0.4'
+  // javaFX
+  implementation 'com.jfoenix:jfoenix:9.0.10'
+  implementation 'org.controlsfx:controlsfx:11.2.1'
+
+  // DB
+  implementation 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
