@@ -1,11 +1,11 @@
-package org.example.gymmanagementapp.config;
+package org.example.gymmanagementapp.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class DBConfigLoader {
+public class ConfigLoader {
     private static final String CONFIG_FILE = "application-secret.properties";
     private static final Properties PROPERTIES;
 
@@ -20,11 +20,7 @@ public class DBConfigLoader {
         }
     }
 
-    public static String getUsername() {
-        return PROPERTIES.getProperty("custom.datasource.username");
-    }
-
-    public static String getPassword() {
-        return PROPERTIES.getProperty("custom.datasource.password");
+    public static String getProperty(String key) {
+        return PROPERTIES.getProperty(key);
     }
 }

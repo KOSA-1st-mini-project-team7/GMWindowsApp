@@ -1,6 +1,7 @@
 package org.example.gymmanagementapp.config;
 
 import lombok.Getter;
+import org.example.gymmanagementapp.util.ConfigLoader;
 
 import java.sql.*;
 
@@ -11,8 +12,8 @@ public class DBConfig {
 
     private DBConfig() {
         try {
-            String username = DBConfigLoader.getUsername();
-            String password = DBConfigLoader.getPassword();
+            String username = ConfigLoader.getProperty("datasource.username");
+            String password = ConfigLoader.getProperty("datasource.password");
             this.connection = DriverManager.getConnection(URL, username, password);
         } catch (SQLException ex) {
             // TODO: 예외 처리
