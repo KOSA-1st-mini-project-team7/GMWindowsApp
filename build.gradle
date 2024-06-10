@@ -41,7 +41,10 @@ dependencies {
   implementation 'org.controlsfx:controlsfx:11.2.1'
 
   // DB
-  implementation 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
+  implementation 'com.oracle.database.jdbc:ojdbc11:23.4.0.24.05'
+
+  // ORM
+//implementation 'org.hibernate.orm:hibernate-core:6.5.2.Final'
 
   // Lombok
   compileOnly 'org.projectlombok:lombok:1.18.32'
@@ -54,10 +57,11 @@ dependencies {
 }
 
 test {
-useJUnitPlatform()}
+  useJUnitPlatform()
+}
 
 jlink {
-  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+  imageZip = layout.buildDirectory.file("distributions/app-${javafx.platform.classifier}.zip")
   options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
   launcher {
     name = 'app'
@@ -66,4 +70,13 @@ jlink {
 
 jlinkZip {
   group = 'distribution'
+}
+
+sourceSets {
+  main {
+    resources {
+      srcDirs = ['src/main/resources', 'src/main/java']
+      exclude '**/*.java' // Java 파일은 제외하고 리소스만 포함
+    }
+  }
 }
