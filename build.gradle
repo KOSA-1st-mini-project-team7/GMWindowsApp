@@ -71,3 +71,12 @@ jlink {
 jlinkZip {
   group = 'distribution'
 }
+
+sourceSets {
+  main {
+    resources {
+      srcDirs = ['src/main/resources', 'src/main/java']
+      exclude '**/*.java' // Java 파일은 제외하고 리소스만 포함
+    }
+  }
+}
