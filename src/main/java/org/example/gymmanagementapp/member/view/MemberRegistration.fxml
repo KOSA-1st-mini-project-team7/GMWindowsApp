@@ -46,7 +46,7 @@
                 </items>
             </ChoiceBox>
             <Label text="생년월일" GridPane.rowIndex="3"/>
-            <DatePicker fx:id="birthdate" prefHeight="22.0" prefWidth="457.0" GridPane.columnIndex="1"
+            <TextField fx:id="dateOfBirthField" prefHeight="22.0" prefWidth="457.0" GridPane.columnIndex="1"
                         GridPane.rowIndex="3"/>
             <Label text="전화번호" GridPane.rowIndex="4"/>
             <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
