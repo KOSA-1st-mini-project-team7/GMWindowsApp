@@ -152,8 +152,10 @@ public class MemberRegistrationController implements Initializable {
 
         if (length == 8) {
             result = cleanInput.replaceAll("(\\d{4})(\\d{2})(\\d{2})", "$1-$2-$3");
+        } else if (length > 8){
+            result = cleanInput.substring(0, 8); // 길이가 8보다 크면 추가된 문자열을 삭제하여 원래 상태로 되돌립니다.
         } else {
-            result = cleanInput; // 유효하지 않은 경우, 입력 그대로 반환
+            result = cleanInput;
         }
 
         return result;
