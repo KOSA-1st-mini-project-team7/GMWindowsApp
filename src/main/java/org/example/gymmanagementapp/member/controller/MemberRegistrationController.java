@@ -14,6 +14,7 @@ import org.example.gymmanagementapp.util.CustomException;
 import org.example.gymmanagementapp.util.ExceptionHandler;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -25,7 +26,7 @@ public class MemberRegistrationController implements Initializable {
     private ChoiceBox<String> genderField;
 
     @FXML
-    private DatePicker birthdate;
+    private TextField dateOfBirthField;
 
     @FXML
     private TextField phoneNumberField;
@@ -53,6 +54,14 @@ public class MemberRegistrationController implements Initializable {
                 phoneNumberField.positionCaret(formattedNumber.length());
             }
         });
+
+        dateOfBirthField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String formattedDate = formatDate(newValue);
+            if (!formattedDate.equals(newValue)) {
+                dateOfBirthField.setText(formattedDate);
+                dateOfBirthField.positionCaret(formattedDate.length());
+            }
+        });
     }
 
     @FXML
@@ -63,7 +72,7 @@ public class MemberRegistrationController implements Initializable {
             MemberDTO member = MemberDTO.builder()
                     .name(nameField.getText())
                     .gender(genderField.getValue())
-                    .dateOfBirth(birthdate.getValue())
+                    .dateOfBirth(LocalDate.parse(dateOfBirthField.getText()))
                     .phoneNumber(phoneNumberField.getText())
                     .address(addressField.getText())
                     .memo(memoField.getText())
@@ -97,16 +106,22 @@ public class MemberRegistrationController implements Initializable {
     private boolean isUserInputPresent() {
         return !(nameField.getText().isEmpty() &&
                 (genderField.getValue() == null || genderField.getValue().isEmpty()) &&
-                birthdate.getValue() == null &&
+                dateOfBirthField.getText() == null &&
                 phoneNumberField.getText().isEmpty() &&
                 addressField.getText().isEmpty() &&
                 memoField.getText().isEmpty());
     }
 
+    /**
+     * 전화번호 형식을 포맷팅하는 메서드.
+     * 주어진 입력 문자열을 정수만 포함하도록 정리한 후,
+     * 길이와 시작 숫자에 따라 올바른 전화번호 형식으로 변환합니다.
+     *
+     * @param input 입력 전화번호 문자열
+     * @return 포맷팅된 전화번호 문자열
+     */
     private String formatPhoneNumber(String input) {
-        if (input == null || input.isEmpty()) return input;
-
-        String cleanInput = input.replaceAll("[^0-9]", "");
+        String cleanInput = formatNumeric(input);
         String result;
         int length = cleanInput.length();
 
@@ -123,6 +138,33 @@ public class MemberRegistrationController implements Initializable {
         return result;
     }
 
+    /**
+     * 숫자 문자열을 yyyy-mm-dd 형식의 날짜 문자열로 변환합니다.
+     * 숫자 길이가 올바르지 않으면 원래 문자열을 반환합니다.
+     *
+     * @param input 숫자 문자열 (예: "20240610")
+     * @return yyyy-mm-dd 형식의 날짜 문자열
+     */
+    private String formatDate(String input) {
+        String cleanInput = formatNumeric(input);
+        String result;
+        int length = cleanInput.length();
+
+        if (length == 8) {
+            result = cleanInput.replaceAll("(\\d{4})(\\d{2})(\\d{2})", "$1-$2-$3");
+        } else {
+            result = cleanInput; // 유효하지 않은 경우, 입력 그대로 반환
+        }
+
+        return result;
+    }
+
+    // 숫자가 아닌 모든 문자 제거
+    private String formatNumeric(String input) {
+        if (input == null || input.isEmpty()) return input;
+        return input.replaceAll("[^0-9]", "");
+    }
+
     private void validateInputData() throws CustomException {
         if (nameField.getText() == null || nameField.getText().trim().isEmpty()) {
             throw new CustomException("이름을 입력해주세요.");
@@ -132,7 +174,7 @@ public class MemberRegistrationController implements Initializable {
             throw new CustomException("성별을 선택해주세요.");
         }
 
-        if (birthdate.getValue() == null) {
+        if (dateOfBirthField.getText() == null) {
             throw new CustomException("생년월일을 선택해주세요.");
         }
 
